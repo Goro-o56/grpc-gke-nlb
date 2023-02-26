@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option go_package = "pkg/grpc";
+
+package myapp;
+
+service GeneratePersonaEditService {
+  rpc GeneratePersonaEdit (InputAndInstruction) returns (PersonaResponse);
+}
+
+service GeneratePersonaCompletionService {
+  rpc GeneratePersonaCompletion (Prompt) returns (PersonaResponse);
+}
+
+//型の定義
+message Prompt {
+  repeated string value = 1;
+}
+
+message InputAndInstruction{
+  string input = 1;
+  string instruction = 2;
+}
+
+message PersonaResponse {
+  string message = 1;
+}
