@@ -7,6 +7,7 @@ import (
 	"github.com/joho/godotenv"
 	"go-grpcsrv-gptclient/health"
 	gptpb "go-grpcsrv-gptclient/pkg/grpc"
+	"go-grpcsrv-gptclient/secretmanager"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/reflection"
@@ -22,7 +23,7 @@ func main() {
 	if port == "" {
 		port = "8080"
 	}
-	listener, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
+	listener, err := net.Listen("tcp", fmt.Sprintf(":%s", port))
 	if err != nil {
 		panic(err)
 	}
@@ -30,8 +31,10 @@ func main() {
 	//2. gRPCサーバーを作成
 	s := grpc.NewServer()
 
+	//環境変数のロード
+	secretmanager.AccessVersion()
 	//3.登録
-	gptpb.RegisterGeneratePersonaCompletionServiceServer(s, NewGptServer()) //TODO:サービスの実態を追加しろ
+	gptpb.RegisterGeneratePersonaCompletionServiceServer(s, NewGptServer())
 	grpc_health_v1.RegisterHealthServer(s, &health.Server{})
 	reflection.Register(s)
 	//4. 作成したgRPCサーバーを8080番ポートで動かす
