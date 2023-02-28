@@ -11,5 +11,5 @@ build:
       inputDigest: {}
 deploy:
   kubectl:
-      manifests:
+    manifests: 
       - k8s/*.yaml

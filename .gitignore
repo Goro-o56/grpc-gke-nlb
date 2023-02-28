@@ -1,7 +1,5 @@
 <<<<<<< HEAD
 google-cloud-sdk
 *.pem
-=======
-google-cloud-sdk
-*.pem
->>>>>>> 832deb2480e6f09a0dda9453a9fff172fef07c5a
+*.secret.json
+*/.terraform
