@@ -1,4 +1,4 @@
-package main
+package secretmanager
 
 import (
 	secretmanager "cloud.google.com/go/secretmanager/apiv1"
@@ -7,20 +7,9 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"testing"
 )
 
-func BenchmarkGptClient(b *testing.B) {
-	input := "以下は自己紹介の為のフォーマットです。かわいい日本人のラノベキャラっぽい名前を生成してください。\n【仕事】アイドル\n【趣味】イラスト\n【性別】女性\n【名前】\n【自己紹介文:4行】\n"
-	instruction := "自己紹介のフォーマットの空いている欄を補完して"
-
-	resp := GptEditClient(input, instruction)
-
-	fmt.Println(resp)
-	return
-}
-
-func TestAccess(t *testing.T) {
+func AccessVersion() {
 	projectID := "237602680776"
 
 	// クライアント生成
@@ -39,7 +28,7 @@ func TestAccess(t *testing.T) {
 	// シークレット上にアクセスする
 	result, err := client.AccessSecretVersion(ctx, req)
 	if err != nil {
-		t.Fatalf("failed to access secret version: %v", err)
+		log.Fatalf("failed to access secret version: %v", err) //何かあった時はここで終わってほしい
 	}
 	log.Printf("%v", result.Payload)
 	prefix := []byte("API_KEY=")

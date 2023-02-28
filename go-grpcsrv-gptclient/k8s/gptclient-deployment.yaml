@@ -12,20 +12,21 @@ spec:
       labels:
         app: go-grpcsrv-gptclient
     spec:
+      serviceAccountName: syutain2727
       containers:
-        - name: go-grpcsrv-gptclient
-          image: go-grpcsrv-gptclient
-          ports:
-            - containerPort: 8081
-          env:
-            - name: PORT
-              value: "8081"
-          resources:
-            requests:
-              cpu: 50m
-              ephemeral-storage: 128Mi
-              memory: 128Mi
-          readinessProbe:
-            grpc:
-              port: 8081
+      - name: go-grpcsrv-gptclient
+        image: go-grpcsrv-gptclient
+        ports:
+        - containerPort: 8081
+        env:
+        - name: PORT
+          value: "8081"
+        resources:
+          requests:
+            cpu: 50m
+            ephemeral-storage: 128Mi
+            memory: 128Mi
+        readinessProbe:
+          grpc:
+            port: 8081
 

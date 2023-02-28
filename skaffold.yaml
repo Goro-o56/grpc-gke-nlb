@@ -1,7 +1,7 @@
 apiVersion: skaffold/v2beta26
 kind: Config
 metadata:
-  name: grpc-gke-nlb-tutorial
+  name: grpc-gke-nlb
 requires:
-  - path: ./go-grpcsrv-gptclient
-  - path: ./envoy
+- path: ./go-grpcsrv-gptclient
+- path: ./envoy

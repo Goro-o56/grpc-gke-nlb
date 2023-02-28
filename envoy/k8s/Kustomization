@@ -5,9 +5,9 @@ metadata:
     annotations:
         config.kubernetes.io/local-config: "true"
 configMapGenerator:
-    - name: envoy-conf
-      files:
-      - envoy.yaml
+- name: envoy-conf
+  files:
+    - envoy.yaml
 resources:
 - envoy-deployment.yaml
 - envoy-service.yaml

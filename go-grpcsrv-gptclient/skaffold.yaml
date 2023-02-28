@@ -1,15 +1,15 @@
 apiVersion: skaffold/v2beta26
 kind: Config
 metadata:
-  name: go-grpc-srv-gptclient
+    name: go-grpcsrv-gptclient
 build:
-  artifact:
-    - image: go-grpc-srv-gptclient
-      ko:
-        fromImage: gcr.io/distroless/static:nonroot
-  tagPolicy:
-    inputDigest: {}
-  deploy:
-    kubectl:
+    artifacts:
+      - image: go-grpcsrv-gptclient
+        ko:
+          fromImage: gcr.io/distroless/static:nonroot
+    tagPolicy:
+      inputDigest: {}
+deploy:
+  kubectl:
       manifests:
-        -k8s/*.yaml
+      - k8s/*.yaml
